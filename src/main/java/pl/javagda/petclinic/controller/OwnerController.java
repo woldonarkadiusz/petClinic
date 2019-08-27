@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.javagda.petclinic.domain.model.Owner;
+import pl.javagda.petclinic.model.FilterForm;
 import pl.javagda.petclinic.service.OwnerService;
 
 import java.util.List;
@@ -60,4 +61,26 @@ public class OwnerController {
 		return "owner/list";
 	}
 
+	@GetMapping("/find-by-last-name")
+	public String findByLastNameForm(Model model) {
+		model.addAttribute("filterForm", new FilterForm());
+
+		return "owner/find";
+	}
+
+	@PostMapping("/find-by-last-name")
+	public String findByLastNameForm(@ModelAttribute("filterForm") FilterForm filterForm,
+									 Model model) {
+		List<Owner> owners = ownerService.findAllByLastNameContaining(filterForm.getLastName());
+		model.addAttribute("owners", owners);
+
+		return "owner/list";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+		ownerService.deleteById(id);
+
+		return "redirect:/owner/list";
+	}
 }

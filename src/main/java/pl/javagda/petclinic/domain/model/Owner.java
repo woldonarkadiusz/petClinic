@@ -19,4 +19,6 @@ public class Owner {
 	private String city;
 	private String telephone;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+	private List<Pet> pets;
 }

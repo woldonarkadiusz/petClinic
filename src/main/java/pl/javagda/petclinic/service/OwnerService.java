@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.javagda.petclinic.domain.model.Owner;
 import pl.javagda.petclinic.domain.repository.OwnerRepository;
-
 import java.util.List;
 import java.util.Optional;
 
